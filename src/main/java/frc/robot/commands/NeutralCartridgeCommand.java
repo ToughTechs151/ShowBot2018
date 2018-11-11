@@ -8,13 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class OffCommand extends Command {
-  public boolean finish=false;
-  public OffCommand() {
+public class NeutralCartridgeCommand extends Command {
+  
+  private boolean isFinished = false;
+  
+  public NeutralCartridgeCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Piston);
+    requires(Robot.cartridgePiston);
   }
 
   // Called just before this Command runs the first time
@@ -25,14 +28,14 @@ public class OffCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Piston.off();
-    finish=true;
+    Robot.cartridgePiston.off();
+    isFinished = true;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return finish;
+    return isFinished;
   }
 
   // Called once after isFinished returns true

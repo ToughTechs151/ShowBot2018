@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ReleaseCommandGroup;
-import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 
 /**
@@ -24,12 +23,13 @@ import frc.robot.subsystems.HopperSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Piston cartridgePiston = new Piston();
+  public static CartridgeSubsystem cartridgePiston = new CartridgeSubsystem();
+  public static final HopperSubsystem hopper = new HopperSubsystem();
+  
   public static CoDriverOI coDriverOI;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   Command m_autonomousCommand;
-  public static final HopperSubsystem hopper = new HopperSubsystem();
 
   /**
    * This function is run when the robot is first started up and should be
