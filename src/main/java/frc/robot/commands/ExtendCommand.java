@@ -8,13 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class ExtendCommand extends Command {
-  public boolean finish=false;
+ 
+  private boolean isFinished = false;
+  
   public ExtendCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Piston);
+    requires(Robot.cartridgePiston);
     
   }
 
@@ -26,14 +29,14 @@ public class ExtendCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Piston.extend();
-    finish=true;
+    Robot.cartridgePiston.extend();
+    isFinished = true;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return finish;
+    return isFinished;
   }
 
   // Called once after isFinished returns true

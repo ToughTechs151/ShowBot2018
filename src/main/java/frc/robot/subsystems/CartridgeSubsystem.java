@@ -6,29 +6,37 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * An example subsystem. You can replace me with your own Subsystem.
  */
-public class Piston extends Subsystem {
+public class CartridgeSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
+
   private DoubleSolenoid cartridgeSolenoid;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-public Piston {
-  cartridgeSolenoid=new DoubleSolenoid(0,0);
-} 
-public void extend() {
-  cartridgeSolenoid.set(DoubleSolenoid.Value.kForward)
-}
-public void retract() {
-  cartridgeSolenoid.set(DoubleSolenoid.Value.kReverse)
-}
-public void off() {
-  cartridgeSolenoid.set(DoubleSolenoid.Value.kOff)
+
+  public CartridgeSubsystem() {
+    cartridgeSolenoid = new DoubleSolenoid(0, 0);
+  }
+
+  public void extend() {
+    cartridgeSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retract() {
+    cartridgeSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void off() {
+    cartridgeSolenoid.set(DoubleSolenoid.Value.kOff);
+  }
 }

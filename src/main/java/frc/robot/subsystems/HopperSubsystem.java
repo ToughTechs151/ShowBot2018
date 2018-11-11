@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveHopperWithJoysticksCommand;
 
 /**
  * Add your docs here.
