@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ReleaseCommandGroup;
 import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.HopperSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,10 +25,11 @@ import frc.robot.subsystems.Piston;
  */
 public class Robot extends TimedRobot {
   public static Piston cartridgePiston = new Piston();
-  public static OI m_oi;
-
-  Command CartridgeCommand;
+  public static CoDriverOI coDriverOI;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  Command m_autonomousCommand;
+  public static final HopperSubsystem hopper = new HopperSubsystem();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -35,9 +37,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.addDefault("Default Auto", new ExampleCommand());
-    // chooser.addObject("My Auto", new MyAutoCommand());
+    coDriverOI = new CoDriverOI(0);
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
