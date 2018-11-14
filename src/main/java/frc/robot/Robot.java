@@ -25,8 +25,11 @@ import frc.robot.subsystems.HopperSubsystem;
 public class Robot extends TimedRobot {
   public static CartridgeSubsystem cartridgePiston = new CartridgeSubsystem();
   public static final HopperSubsystem hopper = new HopperSubsystem();
+  public static final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   
   public static CoDriverOI coDriverOI;
+  public static DriverOI driverOI;
+
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   Command m_autonomousCommand;
@@ -37,6 +40,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    driverOI = new DriverOI(0);
     coDriverOI = new CoDriverOI(0);
     SmartDashboard.putData("Auto mode", m_chooser);
   }
