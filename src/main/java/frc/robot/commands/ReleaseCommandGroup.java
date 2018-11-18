@@ -19,7 +19,7 @@ public class ReleaseCommandGroup extends CommandGroup {
     // addSequential(new Command2());
     // these will run in order.
     addSequential(new RetractCommand());
-    addSequential(new WaitCommand(0.5));
+    addSequential(new WaitCommand(0.15));
     addSequential(new ExtendCommand());
 
     // To run multiple commands at the same time,

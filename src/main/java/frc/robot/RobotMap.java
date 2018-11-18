@@ -46,10 +46,10 @@ public class RobotMap {
 	public static final int RIGHT_TRIGGER = 3;
 
 	// PWM
-	public static final int HOPPER_MOTOR = 4;
+	public static final int HOPPER_MOTOR = 2;
 	public static final int LEFT_FRONT = 0;
 	public static final int LEFT_BACK = 1;
-	public static final int RIGHT_FRONT = 2;
+	public static final int RIGHT_FRONT = 4; //2
 	public static final int RIGHT_BACK = 3;
 
 	// DIO
