@@ -51,7 +51,15 @@ public class RobotMap {
 	public static final int LEFT_BACK = 1;
 	public static final int RIGHT_FRONT = 4; //2
 	public static final int RIGHT_BACK = 3;
+	public static final int LAUNCHER_MOTOR = 5;
 
 	// DIO
 	public static final int HOPPER_SWITCH = 0;
+	public static final int LAUNCHER_ENCODER_A = 1;
+	public static final int LAUNCHER_ENCODER_B = 2;
+
+	//PID CONSTANTS
+	public static final double kPl = 0.5;
+	public static final double kIl = 0;
+	public static final double kDl = 0;
 }
