@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ChangeLauncherSpeedCommand extends Command {
-
-  private double setpoint;
+public class DriveLauncherCommand extends Command {
+  
+  private double speed;
   private boolean isFinished;
 
-  public ChangeLauncherSpeedCommand(double setpoint) {
+  public DriveLauncherCommand(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    this.setpoint = setpoint;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -29,8 +29,7 @@ public class ChangeLauncherSpeedCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.launcherPIDSubsystem.setSetpoint(setpoint);
-    Robot.launcherPIDSubsystem.enable();
+    // Robot.launcherSubsystem.driveLauncher(speed);
     isFinished = true;
   }
 

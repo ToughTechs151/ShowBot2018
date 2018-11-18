@@ -7,18 +7,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class ChangeLauncherSpeedCommand extends Command {
-
-  private double setpoint;
+public class DisableElevatorCommand extends Command {
   private boolean isFinished;
 
-  public ChangeLauncherSpeedCommand(double setpoint) {
+  public DisableElevatorCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    this.setpoint = setpoint;
+    requires(Robot.launcherPIDSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -29,8 +27,8 @@ public class ChangeLauncherSpeedCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.launcherPIDSubsystem.setSetpoint(setpoint);
-    Robot.launcherPIDSubsystem.enable();
+    Robot.launcherPIDSubsystem.disable();
+    Robot.launcherPIDSubsystem.stop();
     isFinished = true;
   }
 

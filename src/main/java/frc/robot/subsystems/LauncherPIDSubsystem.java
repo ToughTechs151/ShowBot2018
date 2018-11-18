@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -23,17 +24,17 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
   
   /**
    * Add your docs here.
+   * 512 Pulses Per Revolution!!!!!!!!!!!!!!!!!!!!!!!
    */
   public LauncherPIDSubsystem() {
     // Intert a subsystem name and PID values here
     super("LauncherPIDSubsystem", RobotMap.kPl, RobotMap.kIl, RobotMap.kDl);
     launcherMotor = new Talon(RobotMap.LAUNCHER_MOTOR);
     launcherEncoder = new Encoder(RobotMap.LAUNCHER_ENCODER_A, RobotMap.LAUNCHER_ENCODER_B);
+    launcherEncoder.setPIDSourceType(PIDSourceType.kRate);
+    setSetpoint(0);
+    setAbsoluteTolerance(0);
     disable();
-    // Use these to get going:
-    // setSetpoint() - Sets where the PID controller should move the system
-    // to
-    // enable() - Enables the PID controller.
   }
 
   @Override
@@ -47,13 +48,24 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return launcherEncoder.getRate();
+    System.out.println("launcher setpoint: " + getSetpoint());
+    System.out.println("Encoder speed: " + getSpeed() + " encoder getrate: " + launcherEncoder.getRate());
+    return getSpeed();
   }
 
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
+    System.out.println("Launcher output: " + output);
     launcherMotor.set(output);
+  }
+
+  public void stop() {
+    launcherMotor.set(0);
+  }
+
+  private double getSpeed() {
+    return launcherEncoder.getRate() / 10;
   }
 }

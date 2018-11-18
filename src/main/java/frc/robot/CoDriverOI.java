@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ChangeLauncherSpeedCommand;
+import frc.robot.commands.DisableElevatorCommand;
+import frc.robot.commands.DriveLauncherCommand;
 import frc.robot.commands.ExtendCommand;
 import frc.robot.commands.IncrementHopperForwardCommand;
 import frc.robot.commands.ReleaseBallPerSecondCommandGroup;
@@ -32,10 +34,10 @@ public class CoDriverOI extends OI {
         y.whenPressed(new ExtendCommand());
 
         a = new JoystickButton(joystick, RobotMap.A);
-        a.whenPressed(new ChangeLauncherSpeedCommand(2300));
+        a.whenPressed(new ChangeLauncherSpeedCommand(-2300));
 
         b = new JoystickButton(joystick, RobotMap.B);
-        b.whenPressed(new ChangeLauncherSpeedCommand(0));
+        b.whenPressed(new DisableElevatorCommand());
 
 
     }
