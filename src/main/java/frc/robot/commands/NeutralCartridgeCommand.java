@@ -28,7 +28,7 @@ public class NeutralCartridgeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cartridgePiston.off();
+    // Robot.cartridgePiston.off();
     isFinished = true;
   }
 

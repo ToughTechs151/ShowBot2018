@@ -41,6 +41,9 @@ public class TankDriveSubsystem extends Subsystem {
 		SpeedControllerGroup left = new SpeedControllerGroup(l1, l2);
 		SpeedControllerGroup right = new SpeedControllerGroup(r1, r2);
 		
+		left.setInverted(true);
+		right.setInverted(true);
+
 		driveTrain = new DifferentialDrive(left, right);
 		
 		gyro = new ADXRS450_Gyro();
@@ -58,10 +61,18 @@ public class TankDriveSubsystem extends Subsystem {
     }
     
     public void drive (OI oi) {
-    	double leftVal = oi.getJoystick().getRawAxis(RobotMap.LEFT_JOYSTICK_VERTICAL_AXIS);
-    	double rightVal = oi.getJoystick().getRawAxis(RobotMap.RIGHT_JOYSTICK_VERTICAL_AXIS);
+    	double leftVal = deadzone(oi.getJoystick().getRawAxis(RobotMap.LEFT_JOYSTICK_VERTICAL_AXIS));
+    	double rightVal = deadzone(oi.getJoystick().getRawAxis(RobotMap.RIGHT_JOYSTICK_VERTICAL_AXIS));
     	
     	drive(leftVal * speedMultiplier, rightVal * speedMultiplier);
-    }
+	}
+	
+	public double deadzone(double val) {
+		if(Math.abs(val) > 0.05) {
+			return val;
+		} else {
+			return 0;
+		}
+	}
 }
 
