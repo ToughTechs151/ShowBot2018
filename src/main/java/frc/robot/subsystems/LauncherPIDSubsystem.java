@@ -7,11 +7,14 @@
 
 package frc.robot.subsystems;
 
+import java.util.Random;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -21,13 +24,12 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
   
   private SpeedController launcherMotor;
   private Encoder launcherEncoder;
+  private Random randomizer = new Random();
   
   /**
-   * Add your docs here.
-   * 512 Pulses Per Revolution!!!!!!!!!!!!!!!!!!!!!!!
+   * 512 Pulses Per Revolution
    */
   public LauncherPIDSubsystem() {
-    // Intert a subsystem name and PID values here
     super("LauncherPIDSubsystem", RobotMap.kPl, RobotMap.kIl, RobotMap.kDl);
     launcherMotor = new Talon(RobotMap.LAUNCHER_MOTOR);
     launcherEncoder = new Encoder(RobotMap.LAUNCHER_ENCODER_A, RobotMap.LAUNCHER_ENCODER_B);
@@ -39,33 +41,44 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+
   }
 
+  private double currentSpeed;
   @Override
   protected double returnPIDInput() {
-    // Return your input value for the PID loop
-    // e.g. a sensor, like a potentiometer:
-    // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    System.out.println("launcher setpoint: " + getSetpoint());
-    System.out.println("Encoder speed: " + getSpeed() + " encoder getrate: " + launcherEncoder.getRate());
+    currentSpeed = getSpeed();
+    //there is a feature where the dashboard will freeze the plot if the output stays the same... fix it by adding random noise
+    SmartDashboard.putNumber("launcher speed", currentSpeed + 0.001 * randomizer.nextDouble());
     return getSpeed();
   }
 
+  private double currentOutput;
+
   @Override
   protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-    // e.g. yourMotor.set(output);
-    System.out.println("Launcher output: " + output);
+    SmartDashboard.putNumber("launcher output", output);
+    currentOutput = output;
     launcherMotor.set(output);
   }
 
   public void stop() {
+    double initialGap = currentOutput;
+    double gap = initialGap;
+    double initialTime = System.currentTimeMillis();
+    while(gap > 0) {
+      double newOutput = initialGap - (1000 - (System.currentTimeMillis()-initialTime)) * initialGap;
+      gap = newOutput;
+      launcherMotor.set(newOutput);
+    }
     launcherMotor.set(0);
   }
 
+  /**
+   * 9.549 is a conversion factor from rad/sec (units of the getRate() method) to rev/min (units of the setpoint)
+   * @return
+   */
   private double getSpeed() {
-    return launcherEncoder.getRate() / 10;
+    return launcherEncoder.getRate() / 9.549;
   }
 }

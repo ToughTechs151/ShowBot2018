@@ -26,10 +26,10 @@ public class LauncherSubsystem extends Subsystem {
   public LauncherSubsystem() {
     launcherMotor = new Talon(RobotMap.LAUNCHER_MOTOR);
     launcherEncoder = new Encoder(RobotMap.LAUNCHER_ENCODER_A, RobotMap.LAUNCHER_ENCODER_B);
-    
   }
 
   public void driveLauncher(double speed) {
+    System.out.println("Encoder count: " + launcherEncoder.get());
     launcherMotor.set(speed);
   }
 
