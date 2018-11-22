@@ -8,54 +8,71 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class DriveHopperCommand extends Command {
+public class IncrementHopperCommand extends Command {
 
-  private long lastTime;
-  private long recentTime;
-  private long gap;
-  private double ballsPerSecond;
-  
+  Timer timer;
+
   private double speed;
 
-  public DriveHopperCommand(double speed) {
+  public IncrementHopperCommand(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.hopper);
     this.speed = speed;
   }
+  
+  private boolean initialState;
+  private int increment;
+  private boolean lastState;
+  private boolean thisState;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        SmartDashboard.putString("Hopper status", "***Hopper Jammed***");
+        end();
+      }
+    }, 750L);
+    initialState = Robot.hopper.getHopperSwitchState();
+    lastState = Robot.hopper.getHopperSwitchState();
+    increment = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hopper.driveHopper(speed);
-    if(Robot.hopper.getHopperSwitchState()) {
-      recentTime = System.currentTimeMillis();
-      gap = recentTime - lastTime;
-      if(gap > 0)
-        ballsPerSecond = 1/gap;
-      else
-        ballsPerSecond = 0;
-      lastTime = recentTime;
-      System.out.println(ballsPerSecond + " balls per second");
+    thisState = Robot.hopper.getHopperSwitchState();
+    if(thisState != lastState) {
+      increment++;
+      lastState = thisState;
     }
+    Robot.hopper.driveHopper(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (initialState && increment == 1) || (!initialState && increment == 2);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.hopper.driveHopper(0);
+    timer.cancel();
+    if(initialState)
+      increment = 1;
+    else
+      increment = 2;
   }
 
   // Called when another command which requires one or more of the same

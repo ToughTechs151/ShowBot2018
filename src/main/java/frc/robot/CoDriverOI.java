@@ -3,11 +3,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ChangeLauncherSpeedCommand;
 import frc.robot.commands.DisableElevatorCommand;
-import frc.robot.commands.DriveLauncherCommand;
 import frc.robot.commands.ExtendCommand;
-import frc.robot.commands.IncrementHopperForwardCommand;
-import frc.robot.commands.ReleaseBallPerSecondCommandGroup;
-import frc.robot.commands.ReleaseCommandGroup;
+import frc.robot.commands.IncrementHopperCommand;
+import frc.robot.commands.ReleaseBallPerSecondThroughHopperCommandGroup;
+import frc.robot.commands.ReleaseBallThroughCartridgeCommandGroup;
 import frc.robot.commands.RetractCommand;
 
 public class CoDriverOI extends OI {
@@ -16,16 +15,16 @@ public class CoDriverOI extends OI {
         super(channel);
 
         start = new JoystickButton(joystick, RobotMap.START);
-        start.whenPressed(new IncrementHopperForwardCommand(0.25));
+        start.whenPressed(new IncrementHopperCommand(0.35));
 
         back = new JoystickButton(joystick, RobotMap.BACK);
-        back.whenPressed(new IncrementHopperForwardCommand(-0.25));
+        back.whenPressed(new IncrementHopperCommand(-0.35));
         
         rightBumper = new JoystickButton(joystick, RobotMap.RIGHT_BUMPER);
-        rightBumper.whileHeld(new ReleaseBallPerSecondCommandGroup());
+        rightBumper.whileHeld(new ReleaseBallPerSecondThroughHopperCommandGroup());
     
         leftBumper = new JoystickButton(joystick, RobotMap.LEFT_BUMPER);    
-        leftBumper.whenPressed(new ReleaseCommandGroup());  
+        leftBumper.whenPressed(new ReleaseBallThroughCartridgeCommandGroup());  
 
         x = new JoystickButton(joystick, RobotMap.X);
         x.whenPressed(new RetractCommand());

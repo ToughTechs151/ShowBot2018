@@ -13,11 +13,7 @@ import frc.robot.commands.DriveWithJoysticksCommand;
 /**
  *
  */
-public class TankDriveSubsystem extends Subsystem {
-
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-	
+public class TankDriveSubsystem extends Subsystem {	
 	private SpeedController l1;
 	private SpeedController l2;
 	private SpeedController r1;
@@ -27,12 +23,12 @@ public class TankDriveSubsystem extends Subsystem {
 	
 	DifferentialDrive driveTrain = null;
 	
-	double speedMultiplier = 0.5;
-	double turbo = 0.75;  //NEED TO IMPLEMENT THIS
-	double crawl = 0.25; //NEED TO IMPLEMENT THIS
+	double speedMultiplier = 0.75;
+	//TODO implement turbo and crawl modes
+	double turbo = 1.0;
+	double crawl = 0.5;
 	
 	public TankDriveSubsystem() {
-		//
 		l1 = new Talon(RobotMap.LEFT_FRONT);
 		l2 = new Talon(RobotMap.LEFT_BACK);
 		r1 = new Talon(RobotMap.RIGHT_FRONT);
@@ -51,8 +47,6 @@ public class TankDriveSubsystem extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new DriveWithJoysticksCommand());
     }
     
