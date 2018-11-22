@@ -26,9 +26,9 @@ public class RobotMap {
 
 	// JOYSTICKS
 	// JOYSTICK BUTTONS
-	public static final int X = 3;
 	public static final int A = 1;
 	public static final int B = 2;
+	public static final int X = 3;
 	public static final int Y = 4;
 	public static final int LEFT_BUMPER = 5;
 	public static final int RIGHT_BUMPER = 6;
@@ -40,18 +40,26 @@ public class RobotMap {
 	// JOYSTICK AXES
 	public static final int LEFT_JOYSTICK_LATERAL_AXIS = 0;
 	public static final int LEFT_JOYSTICK_VERTICAL_AXIS = 1;
-	public static final int RIGHT_JOYSTICK_LATERAL_AXIS = 4;
-	public static final int RIGHT_JOYSTICK_VERTICAL_AXIS = 5;
 	public static final int LEFT_TRIGGER = 2;
 	public static final int RIGHT_TRIGGER = 3;
+	public static final int RIGHT_JOYSTICK_LATERAL_AXIS = 4;
+	public static final int RIGHT_JOYSTICK_VERTICAL_AXIS = 5;
 
 	// PWM
-	public static final int HOPPER_MOTOR = 2;
 	public static final int LEFT_FRONT = 0;
 	public static final int LEFT_BACK = 1;
-	public static final int RIGHT_FRONT = 4; //2
+	public static final int RIGHT_FRONT = 2;
 	public static final int RIGHT_BACK = 3;
+	public static final int HOPPER_MOTOR = 4;
+	public static final int LAUNCHER_MOTOR = 5;
 
 	// DIO
 	public static final int HOPPER_SWITCH = 0;
+	public static final int LAUNCHER_ENCODER_A = 1;
+	public static final int LAUNCHER_ENCODER_B = 2;
+
+	//PID CONSTANTS
+	public static final double kPl = 0.001;
+	public static final double kIl = 0;
+	public static final double kDl = 0;
 }

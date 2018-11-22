@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
+import frc.robot.subsystems.LauncherPIDSubsystem;
+import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TankDriveSubsystem;
 
 /**
@@ -27,7 +29,9 @@ public class Robot extends TimedRobot {
   public static CartridgeSubsystem cartridgePiston = new CartridgeSubsystem();
   public static final HopperSubsystem hopper = new HopperSubsystem();
   public static final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
-  
+  public static final LauncherPIDSubsystem launcherPIDSubsystem = new LauncherPIDSubsystem();
+  // public static final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+
   public static CoDriverOI coDriverOI;
   public static DriverOI driverOI;
 
