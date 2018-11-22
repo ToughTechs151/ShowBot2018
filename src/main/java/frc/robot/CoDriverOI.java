@@ -15,10 +15,10 @@ public class CoDriverOI extends OI {
         super(channel);
 
         start = new JoystickButton(joystick, RobotMap.START);
-        start.whenPressed(new IncrementHopperCommand(0.25));
+        start.whenPressed(new IncrementHopperCommand(0.35));
 
         back = new JoystickButton(joystick, RobotMap.BACK);
-        back.whenPressed(new IncrementHopperCommand(-0.25));
+        back.whenPressed(new IncrementHopperCommand(-0.35));
         
         rightBumper = new JoystickButton(joystick, RobotMap.RIGHT_BUMPER);
         rightBumper.whileHeld(new ReleaseBallPerSecondThroughHopperCommandGroup());
